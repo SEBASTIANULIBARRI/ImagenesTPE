@@ -1,10 +1,28 @@
 <?php
 var_dump($_FILES);
-var_dump($_POST);
+echo '<br>';
 
-$ruta = "img/".$_FILES['foto']['name'];
+var_dump($_POST);
+echo '<br>';
+$fechaHoraActual = date('Y-m-d_H-i-s-ms');
+echo trim($fechaHoraActual);
+echo '<br>';
+$archivo = $_FILES['foto']['name']; // Cambia esto por tu archivo
+
+// Obtener información sobre el archivo
+$informacion = pathinfo($archivo);
+
+// Obtener la extensión
+$extension = $informacion['extension'];
+echo '<br>';
+var_dump($informacion);
+echo '<br>';
+echo "La extensión del archivo es: " . $extension; 
+$ruta = "img/".$informacion['filename'].$fechaHoraActual.'.'.$informacion['extension'];
 move_uploaded_file($_FILES['foto']['tmp_name'], $ruta);
+echo '<br> RUTAAA: ';
 echo "$ruta";
+echo '<br>';
 
 ?>
 
